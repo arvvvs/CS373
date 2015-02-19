@@ -45,11 +45,13 @@ void verma_p1::initStates(){
 		hello>>useless1>>temp>>state;
 		if(state=="accept"){
 			accept=temp;
+			being="accept";
 			cout<<state<<endl;
 			cout<<accept<<endl;
 		}
 		else if(state=="reject"){
 			reject=temp;
+			being="reject";
 			cout<<state<<endl;
 			cout<<reject<<endl;
 		}
@@ -88,4 +90,19 @@ void verma_p1::transitionBuild(){
 		*/
 	}
 }
+void verma_p1::storeState(int state){
+	steppedStates.push_back(state);
+}
+void verma_p1::printStates(){
+	int xyz=steppedStates.size();
+	for(int i=0; i<xyz; i++){
+		cout<<steppedStates.at(i);
+		if(i!=xyz-1){
+		cout<<"->";
+		}
+		else{
+			cout<<" "<<being<<endl;
+		}
+	}
+}	
 

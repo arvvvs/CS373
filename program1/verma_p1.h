@@ -16,6 +16,9 @@ class verma_p1{
 	typedef	pair <int, char> mapKey;
 	typedef	pair <int, string> nextStep;
 		map <mapKey, nextStep> machStorage;
+		vector<int> steppedStates;
+		string being="bounds";
+		pair <int, char> startState;
 	public:
 		//map<mapKey, 
 		verma_p1(string ifile);
@@ -25,4 +28,6 @@ class verma_p1{
 		void buildTape(string tape);
 		void initStates();
 		void transitionBuild();
+		void storeState(int state);
+		void printStates();
 };
