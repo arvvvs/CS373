@@ -1,6 +1,8 @@
 #include "verma_p1.h"
 #include <utility>
 #include <iostream>
+#include <stdlib.h>
+#include <stdio.h>
 #include <list>
 #include <string>
 #include <string.h>
@@ -20,13 +22,13 @@ verma_p1::verma_p1(string ifile){
 verma_p1::~verma_p1(){
 }
 void verma_p1::helloWorld(){
-	cout<<"hello world"<<endl;
+	//cout<<"hello world"<<endl;
 }
 void verma_p1::buildMachine(){
 
 }
 void verma_p1::buildTape(string tape){
-	cout<<tape<<endl;
+	//cout<<tape<<endl;
 	for(string::iterator it = tape.begin(); it != tape.end(); ++it){
 		iTape.push_back(*it);
 	}
@@ -42,18 +44,54 @@ void verma_p1::transition(){
 		string breakup = res->second.second;
 		char nuChar = breakup.at(0);
 		char turn = breakup[1];
-		startState = make_pair(start, nuChar);
+		//cout<<turn<<endl;
+		moveTape(turn, nuChar);
+		if(nuState==accept){
+			steppedStates.push_back(nuState);	
+			being="accept";
+			printStates();
+		}
+		else if(nuState==reject){
+			steppedStates.push_back(nuState);
+			being="reject";
+			printStates();
+		}
+		else{
+		startState = make_pair(nuState, iTape.at(atTape));
+		steppedStates.push_back(nuState);
+		//cout<<atTape<<endl;
+		//cout<<"new state is "<<startState.first<<"character on tape"<<startState.second<<endl;
+		}
 	}
 
 }
-void verma_p1::moveTape(char turn){
+void verma_p1::moveTape(char turn, char nuChar){
 	int xyz = iTape.size();
   	if(turn == 'L'){
-		atTape-=1;
+		atTape--;
 		if(atTape<0){
+			being="bounds";
 			printStates();			
+			exit(EXIT_SUCCESS);
 		}
+		else{
+			iTape.at(atTape+1)= nuChar;
+		}
+
 	}		
+	else if(turn == 'R'){
+	       atTape=atTape+1;
+	       //cout<<atTape<<endl;
+	       if(atTape>=xyz){
+		       being="bounds";
+		       printStates();
+			exit(EXIT_SUCCESS);
+	       }
+	       else{
+		       iTape.at(atTape-1)= nuChar;
+	       }
+
+	}	       
 }
 
 void verma_p1::initStates(){
@@ -68,19 +106,19 @@ void verma_p1::initStates(){
 		if(state=="accept"){
 			accept=temp;
 			being="accept";
-			cout<<state<<endl;
-			cout<<accept<<endl;
+			//cout<<state<<endl;
+			//cout<<accept<<endl;
 		}
 		else if(state=="reject"){
 			reject=temp;
 			being="reject";
-			cout<<state<<endl;
-			cout<<reject<<endl;
+			//cout<<state<<endl;
+			//cout<<reject<<endl;
 		}
 		else if(state=="start"){
 			start=temp;
-			cout<<state<<endl;
-			cout<<start<<endl;
+			//cout<<state<<endl;
+			//cout<<start<<endl;
 		}
 }
 }
@@ -115,7 +153,7 @@ void verma_p1::transitionBuild(){
 void verma_p1::storeState(int state){
 	steppedStates.push_back(state);
 }
-void verma_p1::printStates(){
+int verma_p1::printStates(){
 	int xyz=steppedStates.size();
 	for(int i=0; i<xyz; i++){
 		cout<<steppedStates.at(i);
@@ -124,7 +162,16 @@ void verma_p1::printStates(){
 		}
 		else{
 			cout<<" "<<being<<endl;
+			exit(EXIT_SUCCESS);
 		}
 	}
+	return 0;
 }	
-
+void verma_p1::run(){
+	createStartState();
+	while(transitionCount<=5000){
+		transition();
+		transitionCount++;
+		
+	}	
+}

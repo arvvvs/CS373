@@ -18,6 +18,7 @@ class verma_p1{
 		map <mapKey, nextStep> machStorage;
 		vector<int> steppedStates;
 		string being="bounds";
+		int transitionCount = 1;
 		int accept=-1;
 		int reject=-1;
 		int start= -1;
@@ -27,6 +28,7 @@ class verma_p1{
 		//map<mapKey, 
 		verma_p1(string ifile);
 		~verma_p1();
+		void moveTape(char turn, char nuChar);
 		void transition();
 		void createStartState();
 		void helloWorld();
@@ -35,5 +37,6 @@ class verma_p1{
 		void initStates();
 		void transitionBuild();
 		void storeState(int state);
-		void printStates();
+		int printStates();
+		void run();
 };

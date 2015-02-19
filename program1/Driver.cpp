@@ -10,10 +10,8 @@ int main(int argc, char *argv[]){
 	string ifile;
 	string tape;
 	if(argc==3){
-		cout<<ifile<<endl;
 		tape=argv[2];	
 		ifile=argv[1];
-		cout<<tape<<endl;
 	}
 	else{
 		cout<<"wrong number of commands"<<endl;
@@ -24,8 +22,6 @@ int main(int argc, char *argv[]){
 	Hello.buildTape(tape);
 	Hello.initStates();
 	Hello.transitionBuild();
-	Hello.createStartState();
-	Hello.transition();
-
+	Hello.run();
 	return -1;
 }
