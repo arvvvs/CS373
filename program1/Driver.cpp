@@ -24,5 +24,8 @@ int main(int argc, char *argv[]){
 	Hello.buildTape(tape);
 	Hello.initStates();
 	Hello.transitionBuild();
+	Hello.createStartState();
+	Hello.transition();
+
 	return -1;
 }

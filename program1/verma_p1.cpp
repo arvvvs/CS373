@@ -31,10 +31,32 @@ void verma_p1::buildTape(string tape){
 		iTape.push_back(*it);
 	}
 }
+void verma_p1::createStartState(){
+	startState = make_pair(start, iTape.at(0));
+	steppedStates.push_back(start);
+}
+void verma_p1::transition(){
+	auto res = machStorage.find(startState);
+	if(res != machStorage.end()){
+		int nuState=res->second.first;
+		string breakup = res->second.second;
+		char nuChar = breakup.at(0);
+		char turn = breakup[1];
+		startState = make_pair(start, nuChar);
+	}
+
+}
+void verma_p1::moveTape(char turn){
+	int xyz = iTape.size();
+  	if(turn == 'L'){
+		atTape-=1;
+		if(atTape<0){
+			printStates();			
+		}
+	}		
+}
+
 void verma_p1::initStates(){
-	int accept=-1;
-	int reject=-1;
-	int start= -1;
 	int temp=-1;
 	string line;
 	for(int i=0; i<3; i++){
