@@ -2,15 +2,18 @@
 #include<iostream>
 #include<string.h>
 #include<stdio.h>
+#include<fstream>
 #include "verma_p1.h"
 using namespace std;
 
 int main(int argc, char *argv[]){
 	string ifile;
-	string ofile;
-	if(argc==2){
+	string tape;
+	if(argc==3){
 		cout<<ifile<<endl;
-
+		tape=argv[2];	
+		ifile=argv[1];
+		cout<<tape<<endl;
 	}
 	else{
 		cout<<"wrong number of commands"<<endl;
@@ -18,4 +21,7 @@ int main(int argc, char *argv[]){
 	}
 	verma_p1 Hello(ifile);
 	Hello.helloWorld();
+	Hello.buildTape(tape);
+	Hello.initStates();
+	return -1;
 }
