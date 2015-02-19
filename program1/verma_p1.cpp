@@ -172,6 +172,15 @@ void verma_p1::run(){
 	while(transitionCount<=5000){
 		transition();
 		transitionCount++;
-		
 	}	
+	int xyz=steppedStates.size();
+	for(int i=0; i<xyz; i++){
+		cout<<steppedStates.at(i);
+		if(i!=xyz-1){
+			cout<<"->";
+		}
+		else{
+			cout<<" "<<"quit"<<endl;
+		}
+	}
 }
