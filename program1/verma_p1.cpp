@@ -1,4 +1,5 @@
 #include "verma_p1.h"
+#include <utility>
 #include <iostream>
 #include <list>
 #include <string>
@@ -62,4 +63,29 @@ void verma_p1::initStates(){
 void verma_p1::transitionBuild(){
 	string line;
 	while(getline(iFile, line)){
+		string useless1;
+		int initState = -1;
+		char readTape;
+		int stepState = -1;
+		char writeTape;
+		char direction;
+		string combineSaveMeGod = "";
+		stringstream hello(line);
+		hello>>useless1>>initState>>readTape>>stepState>>writeTape>>direction;
+		combineSaveMeGod+=writeTape;
+		combineSaveMeGod+=direction;
+		machStorage[make_pair(initState, readTape)]=make_pair(stepState,combineSaveMeGod);
+		/*
+		auto res = machStorage.find(make_pair(0, 'x'));
+		if(res != machStorage.end()){
+		cout<<res->second.first<<" "<<res->second.second<<endl;
+		}*/
+	/*	cout<<initState<<endl;
+		cout<<readTape<<endl;
+		cout<<stepState<<endl;
+		cout<<writeTape<<endl;
+		cout<<direction<<endl;
+		*/
+	}
+}
 

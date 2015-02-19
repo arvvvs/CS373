@@ -23,5 +23,6 @@ int main(int argc, char *argv[]){
 	Hello.helloWorld();
 	Hello.buildTape(tape);
 	Hello.initStates();
+	Hello.transitionBuild();
 	return -1;
 }
